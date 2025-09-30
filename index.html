@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FluxPay - Dashboard de Métricas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Logo -->
+        <div class="logo-section">
+            <img id="logo" src="logo-fluxpay.png" alt="FluxPay Logo" class="logo">
+        </div>
+
+        <!-- Painel de Métricas -->
+        <div class="metrics-panel">
+            <div class="metric-card">
+                <div class="metric-label">Valor Investido</div>
+                <div class="metric-value" id="investido" data-testid="text-investido">R$ 0,00</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Valor Faturado</div>
+                <div class="metric-value" id="faturado" data-testid="text-faturado">R$ 0,00</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">ROAS</div>
+                <div class="metric-value" id="roas" data-testid="text-roas">0.00x</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Lucro do Dia</div>
+                <div class="metric-value" id="lucro" data-testid="text-lucro">R$ 0,00</div>
+            </div>
+        </div>
+
+        <!-- Formulário -->
+        <div class="form-container">
+            <form id="paymentForm" data-testid="form-payment">
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input 
+                        type="tel" 
+                        id="telefone" 
+                        name="telefone" 
+                        placeholder="(00) 00000-0000" 
+                        required
+                        data-testid="input-telefone"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="valor">Valor Pago</label>
+                    <input 
+                        type="text" 
+                        id="valor" 
+                        name="valor" 
+                        placeholder="R$ 0,00" 
+                        required
+                        data-testid="input-valor"
+                    >
+                </div>
+                <button type="submit" class="submit-btn" data-testid="button-submit">
+                    Enviar Pagamento
+                </button>
+            </form>
+
+            <!-- Mensagem de resposta -->
+            <div id="responseMessage" class="response-message hidden" data-testid="text-response"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
