@@ -1,5 +1,5 @@
 // Configuração do webhook N8N
-const N8N_WEBHOOK = 'SUA_URL_DO_WEBHOOK_N8N_AQUI';
+const N8N_WEBHOOK = 'https://n8n.srv1025988.hstgr.cloud/webhook/fluxpay';
 
 // Elementos do DOM
 const form = document.getElementById('paymentForm');
