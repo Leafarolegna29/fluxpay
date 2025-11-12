@@ -1,171 +1,157 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FluxPay – Dashboard e Registro de Pagamentos</title>
-
-  <!-- quando aprovar, eu adiciono o style.css -->
-  <!-- <link rel="stylesheet" href="style.css"> -->
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FluxPay Dashboard - Monitoramento de Pagamentos</title>
+    <meta name="description" content="Dashboard profissional para monitoramento e registro de pagamentos de produtos digitais">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <noscript>Ative o JavaScript para utilizar todas as funcionalidades.</noscript>
-
-  <header class="fp-header" role="banner" data-testid="header">
-    <div class="fp-header__brand">
-      <img
-        src="https://i.ibb.co/hR0PN6ZC/Chat-GPT-Image-29-de-set-de-2025-19-31-32.png"
-        alt="FluxPay"
-        class="fp-logo"
-        width="160"
-        height="160"
-        loading="eager"
-      />
-      <div class="fp-titlegroup">
-        <h1 class="fp-title">FluxPay Dashboard</h1>
-        <p class="fp-subtitle">Monitoramento e registro de pagamentos</p>
-      </div>
-    </div>
-  </header>
-
-  <main id="conteudo" class="fp-main" role="main">
-    <!-- Painel de métricas -->
-    <section aria-labelledby="blk-metricas-title" class="fp-block fp-block--metrics" data-testid="metrics">
-      <h2 id="blk-metricas-title" class="fp-visually-hidden">Métricas</h2>
-
-      <div class="fp-metric" data-testid="metric-investido">
-        <span class="fp-metric__label">Valor Investido</span>
-        <strong class="fp-metric__value" id="metric-investido">R$ 0,00</strong>
-      </div>
-
-      <div class="fp-metric" data-testid="metric-faturado">
-        <span class="fp-metric__label">Valor Faturado</span>
-        <strong class="fp-metric__value" id="metric-faturado">R$ 0,00</strong>
-      </div>
-
-      <div class="fp-metric" data-testid="metric-roas">
-        <span class="fp-metric__label">ROAS</span>
-        <strong class="fp-metric__value" id="metric-roas">0.00x</strong>
-      </div>
-
-      <div class="fp-metric" data-testid="metric-lucro">
-        <span class="fp-metric__label">Lucro do Dia</span>
-        <strong class="fp-metric__value" id="metric-lucro">R$ 0,00</strong>
-      </div>
-    </section>
-
-    <!-- Formulário -->
-    <section aria-labelledby="blk-form-title" class="fp-block fp-block--form" data-testid="form-section">
-      <h2 id="blk-form-title" class="fp-block__title">Registrar pagamento</h2>
-
-      <form
-        id="paymentForm"
-        class="fp-form"
-        method="post"
-        novalidate
-        data-webhook=""        <!-- preenchido depois no JS -->
-        data-testid="payment-form"
-      >
-        <!-- Telefone MSISDN no formato 55xxxxxxxxxxx -->
-        <div class="fp-field">
-          <label for="telefone" class="fp-label">Telefone (55xxxxxxxxxxx)</label>
-          <input
-            id="telefone"
-            name="telefone"
-            type="tel"
-            inputmode="numeric"
-            autocomplete="tel"
-            placeholder="55..."
-            required
-            minlength="12"
-            maxlength="14"
-            pattern="55\d{10,12}"
-            class="fp-input"
-            data-testid="input-telefone"
-            aria-describedby="telefone-help"
-          />
-          <small id="telefone-help" class="fp-help">
-            Use somente números: código do país 55 + DDD + número (ex.: 5592987654321).
-          </small>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <img src="fluxpay-logo.png" alt="FluxPay Logo" class="logo">
+                <div class="header-text">
+                    <h1 class="header-title">FluxPay Dashboard</h1>
+                    <p class="header-subtitle">Monitoramento e registro de pagamentos</p>
+                </div>
+            </div>
         </div>
+    </header>
 
-        <!-- Produto -->
-        <div class="fp-field">
-          <label for="produto" class="fp-label">Produto</label>
-          <select id="produto" name="produto" required class="fp-select" data-testid="select-produto">
-            <option value="">Selecione</option>
-            <option value="guia_noiva_inteligente">Guia da Noiva Inteligente</option>
-          </select>
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Metrics Grid -->
+            <div class="metrics-grid">
+                <!-- Valor Investido -->
+                <div class="metric-card glass-card">
+                    <div class="metric-content">
+                        <div class="metric-info">
+                            <p class="metric-title">Valor Investido</p>
+                            <p class="metric-value" id="investido">R$ 0,00</p>
+                        </div>
+                        <div class="metric-icon icon-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Valor Faturado -->
+                <div class="metric-card glass-card">
+                    <div class="metric-content">
+                        <div class="metric-info">
+                            <p class="metric-title">Valor Faturado</p>
+                            <p class="metric-value" id="faturado">R$ 0,00</p>
+                        </div>
+                        <div class="metric-icon icon-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
+                                <polyline points="16 7 22 7 22 13"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROAS -->
+                <div class="metric-card glass-card">
+                    <div class="metric-content">
+                        <div class="metric-info">
+                            <p class="metric-title">ROAS</p>
+                            <p class="metric-value" id="roas">0,00x</p>
+                        </div>
+                        <div class="metric-icon icon-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lucro do Dia -->
+                <div class="metric-card glass-card">
+                    <div class="metric-content">
+                        <div class="metric-info">
+                            <p class="metric-title">Lucro do Dia</p>
+                            <p class="metric-value" id="lucro">R$ 0,00</p>
+                        </div>
+                        <div class="metric-icon icon-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                <line x1="1" y1="10" x2="23" y2="10"></line>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Form -->
+            <div class="form-container">
+                <div class="payment-form glass-card">
+                    <div class="form-header">
+                        <h2 class="form-title">Registrar Pagamento</h2>
+                        <p class="form-subtitle">Produto: Guia da Noiva Inteligente</p>
+                    </div>
+
+                    <form id="paymentForm" class="form">
+                        <div class="form-group">
+                            <label for="telefone" class="form-label">Telefone (WhatsApp)</label>
+                            <input 
+                                type="tel" 
+                                id="telefone" 
+                                class="form-input" 
+                                placeholder="55xxxxxxxxxxx" 
+                                maxlength="13"
+                                required
+                            >
+                            <p class="form-hint">Formato: 55 + DDD + número (ex: 5511999999999)</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Selecione o Plano</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="plano" value="basico" class="radio-input">
+                                    <div class="radio-content">
+                                        <div class="radio-label">Plano Básico</div>
+                                        <div class="radio-price">R$ 10,00</div>
+                                    </div>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="plano" value="premium" class="radio-input" checked>
+                                    <div class="radio-content">
+                                        <div class="radio-label">Plano Premium</div>
+                                        <div class="radio-price">R$ 19,90</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-button" id="submitBtn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                            <span id="btnText">Enviar Pagamento</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
+    </main>
 
-        <!-- Planos (apenas um) -->
-        <fieldset
-          id="planos"
-          class="fp-fieldset"
-          aria-describedby="planos-help"
-          data-testid="fieldset-planos"
-          hidden
-        >
-          <legend class="fp-legend">Plano</legend>
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
 
-          <div class="fp-radio">
-            <input
-              type="radio"
-              id="plano-basico"
-              name="plano"
-              value="basico"
-              data-valor="10.00"
-              required
-            />
-            <label for="plano-basico">Básico — R$ 10,00</label>
-          </div>
-
-          <div class="fp-radio">
-            <input
-              type="radio"
-              id="plano-premium"
-              name="plano"
-              value="premium"
-              data-valor="19.90"
-              required
-            />
-            <label for="plano-premium">Premium — R$ 19,90</label>
-          </div>
-
-          <small id="planos-help" class="fp-help">Selecione apenas um plano.</small>
-        </fieldset>
-
-        <!-- mensagem de feedback -->
-        <div
-          id="responseMessage"
-          class="fp-feedback"
-          role="status"
-          aria-live="polite"
-          data-testid="response"
-        ></div>
-
-        <div class="fp-actions">
-          <button type="submit" class="fp-button" data-testid="btn-submit">
-            Enviar Pagamento
-          </button>
-        </div>
-      </form>
-    </section>
-  </main>
-
-  <footer class="fp-footer" role="contentinfo">
-    <small>© <span id="year"></span> FluxPay. Todos os direitos reservados.</small>
-  </footer>
-
-  <!-- quando aprovar, eu habilito o script.js -->
-  <!-- <script src="script.js" defer></script> -->
-  <script>
-    // apenas preenche o ano no rodapé, sem interferir no restante
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
