@@ -1,157 +1,167 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FluxPay Dashboard - Monitoramento de Pagamentos</title>
-    <meta name="description" content="Dashboard profissional para monitoramento e registro de pagamentos de produtos digitais">
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="https://i.ibb.co/hR0PN6ZC/Chat-GPT-Image-29-de-set-de-2025-19-31-32.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FluxPay Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Poppins', 'sans-serif'],
+            },
+            colors: {
+              'brand-cyan': '#00BCD4',
+              'dark-bg': '#0D1117',
+              'dark-card': '#161B22',
+              'dark-border': '#21262d',
+              'text-primary': '#c9d1d9',
+              'text-secondary': '#8b949e',
+            },
+            keyframes: {
+              'slide-in-right': {
+                '0%': { transform: 'translateX(100%)', opacity: '0' },
+                '100%': { transform: 'translateX(0)', opacity: '1' },
+              },
+            },
+            animation: {
+              'slide-in-right': 'slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+            }
+          },
+        },
+      }
+    </script>
 </head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <img src="fluxpay-logo.png" alt="FluxPay Logo" class="logo">
-                <div class="header-text">
-                    <h1 class="header-title">FluxPay Dashboard</h1>
-                    <p class="header-subtitle">Monitoramento e registro de pagamentos</p>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <div class="container">
-            <!-- Metrics Grid -->
-            <div class="metrics-grid">
-                <!-- Valor Investido -->
-                <div class="metric-card glass-card">
-                    <div class="metric-content">
-                        <div class="metric-info">
-                            <p class="metric-title">Valor Investido</p>
-                            <p class="metric-value" id="investido">R$ 0,00</p>
+<body class="bg-dark-bg">
+    <div id="app" class="min-h-screen text-white p-6 sm:p-8 lg:p-12">
+        <div class="max-w-6xl mx-auto">
+            <header class="text-center mb-8 md:mb-10">
+                <img 
+                  src="https://i.ibb.co/hR0PN6ZC/Chat-GPT-Image-29-de-set-de-2025-19-31-32.png" 
+                  alt="FluxPay Logo" 
+                  class="h-48 mx-auto" 
+                />
+            </header>
+            
+            <main>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                    <!-- Metric Card: Valor Investido -->
+                    <div class="bg-dark-card p-6 rounded-2xl border border-dark-border shadow-lg transition-all duration-300 hover:border-brand-cyan/70 hover:shadow-[0_0_15px_rgba(0,188,212,0.2)]">
+                        <div class="flex justify-between items-start">
+                          <p class="text-sm font-medium text-text-secondary">Valor Investido</p>
+                          <div class="p-2 bg-dark-border rounded-lg text-brand-cyan">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                          </div>
                         </div>
-                        <div class="metric-icon icon-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="12" y1="1" x2="12" y2="23"></line>
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                            </svg>
+                        <div class="mt-2">
+                          <p class="text-3xl md:text-4xl font-bold text-text-primary">R$ <span id="invested-value">0,00</span></p>
                         </div>
                     </div>
-                </div>
-
-                <!-- Valor Faturado -->
-                <div class="metric-card glass-card">
-                    <div class="metric-content">
-                        <div class="metric-info">
-                            <p class="metric-title">Valor Faturado</p>
-                            <p class="metric-value" id="faturado">R$ 0,00</p>
-                        </div>
-                        <div class="metric-icon icon-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline>
-                                <polyline points="16 7 22 7 22 13"></polyline>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ROAS -->
-                <div class="metric-card glass-card">
-                    <div class="metric-content">
-                        <div class="metric-info">
-                            <p class="metric-title">ROAS</p>
-                            <p class="metric-value" id="roas">0,00x</p>
-                        </div>
-                        <div class="metric-icon icon-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lucro do Dia -->
-                <div class="metric-card glass-card">
-                    <div class="metric-content">
-                        <div class="metric-info">
-                            <p class="metric-title">Lucro do Dia</p>
-                            <p class="metric-value" id="lucro">R$ 0,00</p>
-                        </div>
-                        <div class="metric-icon icon-primary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
-                                <line x1="1" y1="10" x2="23" y2="10"></line>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Payment Form -->
-            <div class="form-container">
-                <div class="payment-form glass-card">
-                    <div class="form-header">
-                        <h2 class="form-title">Registrar Pagamento</h2>
-                        <p class="form-subtitle">Produto: Guia da Noiva Inteligente</p>
-                    </div>
-
-                    <form id="paymentForm" class="form">
-                        <div class="form-group">
-                            <label for="telefone" class="form-label">Telefone (WhatsApp)</label>
-                            <input 
-                                type="tel" 
-                                id="telefone" 
-                                class="form-input" 
-                                placeholder="55xxxxxxxxxxx" 
-                                maxlength="13"
-                                required
-                            >
-                            <p class="form-hint">Formato: 55 + DDD + número (ex: 5511999999999)</p>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Selecione o Plano</label>
-                            <div class="radio-group">
-                                <label class="radio-option">
-                                    <input type="radio" name="plano" value="basico" class="radio-input">
-                                    <div class="radio-content">
-                                        <div class="radio-label">Plano Básico</div>
-                                        <div class="radio-price">R$ 10,00</div>
-                                    </div>
-                                </label>
-                                <label class="radio-option">
-                                    <input type="radio" name="plano" value="premium" class="radio-input" checked>
-                                    <div class="radio-content">
-                                        <div class="radio-label">Plano Premium</div>
-                                        <div class="radio-price">R$ 19,90</div>
-                                    </div>
-                                </label>
+                    <!-- Metric Card: Valor Faturado -->
+                    <div class="bg-dark-card p-6 rounded-2xl border border-dark-border shadow-lg transition-all duration-300 hover:border-brand-cyan/70 hover:shadow-[0_0_15px_rgba(0,188,212,0.2)]">
+                        <div class="flex justify-between items-start">
+                            <p class="text-sm font-medium text-text-secondary">Valor Faturado</p>
+                            <div class="p-2 bg-dark-border rounded-lg text-brand-cyan">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
                             </div>
                         </div>
-
-                        <button type="submit" class="submit-button" id="submitBtn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="22" y1="2" x2="11" y2="13"></line>
-                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                            </svg>
-                            <span id="btnText">Enviar Pagamento</span>
-                        </button>
+                        <div class="mt-2">
+                            <p class="text-3xl md:text-4xl font-bold text-text-primary">R$ <span id="billed-value">0,00</span></p>
+                        </div>
+                    </div>
+                    <!-- Metric Card: ROAS -->
+                    <div class="bg-dark-card p-6 rounded-2xl border border-dark-border shadow-lg transition-all duration-300 hover:border-brand-cyan/70 hover:shadow-[0_0_15px_rgba(0,188,212,0.2)]">
+                        <div class="flex justify-between items-start">
+                            <p class="text-sm font-medium text-text-secondary">ROAS</p>
+                            <div class="p-2 bg-dark-border rounded-lg text-brand-cyan">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <p class="text-3xl md:text-4xl font-bold text-text-primary"><span id="roas-value">0,00</span>x</p>
+                        </div>
+                    </div>
+                    <!-- Metric Card: Lucro do Dia -->
+                    <div class="bg-dark-card p-6 rounded-2xl border border-dark-border shadow-lg transition-all duration-300 hover:border-brand-cyan/70 hover:shadow-[0_0_15px_rgba(0,188,212,0.2)]">
+                        <div class="flex justify-between items-start">
+                            <p class="text-sm font-medium text-text-secondary">Lucro do Dia</p>
+                            <div class="p-2 bg-dark-border rounded-lg text-brand-cyan">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"></path><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"></path><path d="M18 12a2 2 0 0 0-2 2h4a2 2 0 0 0-2-2z"></path></svg>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <p class="text-3xl md:text-4xl font-bold text-text-primary">R$ <span id="profit-value">0,00</span></p>
+                        </div>
+                    </div>
+                </div>
+              
+                <div class="bg-dark-card p-6 md:p-8 rounded-2xl border border-dark-border shadow-lg mt-10">
+                    <div class="mb-6">
+                      <h2 class="text-xl font-semibold text-text-primary">Registrar Pagamento</h2>
+                      <p class="text-sm text-text-secondary mt-1">
+                        Produto: <span id="product-name" class="text-text-primary font-medium"></span>
+                      </p>
+                    </div>
+              
+                    <form id="payment-form" class="space-y-6">
+                      <div>
+                        <label for="phone" class="block text-sm font-medium text-text-secondary mb-2">
+                          Telefone (WhatsApp)
+                        </label>
+                        <input
+                          type="tel"
+                          id="phone"
+                          name="phone"
+                          value="55"
+                          placeholder="55xxxxxxxxxxx"
+                          required
+                          class="w-full bg-dark-bg border border-dark-border text-text-primary rounded-xl p-3 focus:ring-2 focus:ring-brand-cyan focus:border-brand-cyan transition-colors duration-200"
+                        />
+                        <p class="text-xs text-text-secondary mt-2">Formato: 55 + DDD + número (ex: 5511999999999)</p>
+                      </div>
+                      
+                      <div>
+                        <label class="block text-sm font-medium text-text-secondary mb-2">Selecione o Plano</label>
+                        <div id="plan-selection" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Plan buttons will be inserted by JS -->
+                        </div>
+                      </div>
+              
+                      <button id="submit-button" type="submit" disabled class="w-full bg-brand-cyan hover:bg-brand-cyan/90 disabled:bg-gray-500 disabled:cursor-not-allowed text-white font-bold py-3 px-4 rounded-xl transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-cyan-500/50 flex items-center justify-center gap-2">
+                        <span id="submit-button-content">
+                            <span class="flex items-center justify-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                                <span>Enviar Pagamento</span>
+                            </span>
+                        </span>
+                        <span id="spinner" class="hidden">
+                            <span class="flex items-center justify-center gap-2">
+                                <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                  </svg>
+                                  <span>Enviando...</span>
+                            </span>
+                        </span>
+                      </button>
                     </form>
                 </div>
-            </div>
+
+                <div class="fixed bottom-5 right-5 z-50">
+                    <div id="notification-toast" class="p-4 rounded-lg shadow-xl text-white animate-slide-in-right hidden">
+                      <!-- Notification message goes here -->
+                    </div>
+                </div>
+            </main>
         </div>
-    </main>
-
-    <!-- Toast Container -->
-    <div id="toastContainer" class="toast-container"></div>
-
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
